@@ -3,6 +3,7 @@ import time
 import requests
 from bs4 import BeautifulSoup
 import smtplib
+from login import getLogin
 
 # Website URL
 # TODO: ask user for link
@@ -42,7 +43,8 @@ def send_email(product_name, price):
     server.starttls()
     server.ehlo()
 
-    server.login('rajkondaveeti3@gmail.com', 'eynbnrlxbyztigtx')
+    login_info = getLogin()
+    server.login(login_info[0], login_info[1])
 
     subject = "Price has fallen!"
     body = 'Item: {}\nCurrent Price: {}\n\nLink: {}'.format(product_name, price, URL)
